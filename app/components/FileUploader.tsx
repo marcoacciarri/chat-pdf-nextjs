@@ -12,7 +12,7 @@ export const FileUploader = () => {
 
     return (
         <div {...getRootProps()}
-            className={`border-2 border-dashed border-gray-300 rounded-md p-4 h-96 flex items-center justify-center ${isFocused || isDragActive ? 'border-blue-500 bg-indigo-900' : ''}`}
+            className={`border-2 border-dashed border-gray-300 rounded-md p-4 h-96 flex items-center justify-center ${isFocused || isDragActive || isDragAccept ? 'border-blue-500 bg-indigo-900' : ''}`}
         >
             <input {...getInputProps()} />
             <div className='flex flex-col items-center'>
@@ -24,7 +24,7 @@ export const FileUploader = () => {
                 ) : (
                     <>
                         <ArrowCircleDown font-size="large" className='animate-bounce' />
-                        <p>Drag 'n' drop some files here, or click to select files</p>
+                        <p>Drag n drop some files here, or click to select files</p>
                     </>
                 )}
             </div>

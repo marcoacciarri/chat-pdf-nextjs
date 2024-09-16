@@ -4,12 +4,16 @@ import { Header as Header } from '../components/Header'
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="flex flex-col flex-1 h-screen w-100 px-4">
-            <Header />
-            <main className="">
-                {children}
-            </main>
-        </div>
+        <ClerkLoaded>
+            <div className="flex flex-col flex-1 h-screen w-100 px-4">
+                <Header />
+                <main className="">
+                    {children}
+                </main>
+
+
+            </div>
+        </ClerkLoaded>
     )
 }
 

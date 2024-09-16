@@ -1,9 +1,8 @@
 'use client'
 import React from 'react'
 import { Button } from '@mui/material'
-import { PlusOne, PlusOneOutlined } from '@mui/icons-material'
+import { PlusOneOutlined } from '@mui/icons-material'
 import { useRouter } from 'next/navigation'
-import { FileUploader } from './FileUploader'
 
 function PlaceholderDocument() {
     const router = useRouter();
