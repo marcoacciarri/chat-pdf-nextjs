@@ -1,11 +1,13 @@
 import React from 'react'
-import { DashboardHeader as Header } from '../components/DashboardHeader'
-
+import Documents from '../components/Documents'
+//export const dynamic = "force-dynamic"
 
 function Dashboard() {
     return (
-        <div>
-            Dashboard </div>
+        <div className='h-full max-w-7xl mx-auto'>
+            Dashboard
+            <Documents />
+        </div>
     )
 }
 
