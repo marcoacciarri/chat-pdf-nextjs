@@ -2,13 +2,23 @@
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { RocketLaunch, ArrowCircleDown } from '@mui/icons-material'
+import useFileUpload from '../../hooks/useFileUpload'
 
 
 export const FileUploader = () => {
-    const onDrop = useCallback((acceptedFiles: File[]) => {
+    const { progress, status, fileId, handleUpload } = useFileUpload();
+
+    const onDrop = useCallback(async (acceptedFiles: File[]) => {
         console.log(acceptedFiles)
+        const file = acceptedFiles[0];
+
+        if (file) {
+            await handleUpload(file);
+        } else {
+
+        }
     }, [])
-    const { getRootProps, getInputProps, isDragActive, isFocused, isDragAccept } = useDropzone({ onDrop })
+    const { getRootProps, getInputProps, isDragActive, isFocused, isDragAccept } = useDropzone({ onDrop, maxFiles: 1, accept: { "application/pdf": [".pdf"] } })
 
     return (
         <div {...getRootProps()}
