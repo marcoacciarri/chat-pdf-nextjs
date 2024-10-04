@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { RocketLaunch, ArrowCircleDown } from '@mui/icons-material'
 import useFileUpload from '../../hooks/useFileUpload'
 import { useRouter } from 'next/navigation'
-import CircularProgressWithLabel from './ui/CircularProgessWithLabel';
+import { CircularProgressWithLabel } from './ui/CircularProgessWithLabel';
 
 
 export const FileUploader = () => {
@@ -50,7 +50,7 @@ export const FileUploader = () => {
                         className={`radial-progress bg-indigo-300 text-white border-indigo-600 border-4 ${progress === 100 && "hidden"}`}
                         role="progressbar"
                     >Uploading {progress}%</p>
-                    {/* <CircularProgressWithLabel value={progress} /> */}
+                    <CircularProgressWithLabel value={progress} />
 
                     <p>{String(status) || 'Uploading'}</p>
                 </div>
