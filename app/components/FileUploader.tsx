@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { RocketLaunch, ArrowCircleDown } from '@mui/icons-material'
-import useFileUpload from '../../hooks/useFileUpload'
+import useFileUpload from 'hooks/useFileUpload'
 import { useRouter } from 'next/navigation'
 import { CircularProgressWithLabel } from './ui/CircularProgessWithLabel';
 

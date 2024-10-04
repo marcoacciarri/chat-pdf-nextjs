@@ -3,7 +3,7 @@ import { useUser } from '@clerk/nextjs';
 //import { useRouter } from 'next/navigation';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
-import { storage, db } from '../firebase';
+import { storage, db } from 'lib/firebase';
 import { v4 as uuid } from 'uuid';
 
 export enum StatusText {
