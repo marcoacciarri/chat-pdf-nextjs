@@ -46,5 +46,21 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 - run `npm install firebase-admin` to install the serve side sdk
 - Copy the node.js config snippet to firebaseAdmin.ts
 
+## Integrate Pinecone
+- Go to pinecone.io and create an account
+- install pinecone with `npm install @pinecone-database/pinecone`
+- Create new index by going to Dashboard > Database > Create index
+- Give it a name and choose 1,536 dimensions and "cosine" method (best for AI)
+- Go down to serverless section and choose "AWS", choose region and Create Index
+
+## Integrate Langchain
+- go js.langchain.com/docs/how_to/installation
+- install langchain with 
+    - `npm install langchain @langchain/core`, 
+    - `npm install @langchain/community @langchain/core`, 
+    - `npm install @langchain/openai @langchain/core`, 
+    - `npm install @langchain/pinecone @langchain/core`
+- 
+
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
