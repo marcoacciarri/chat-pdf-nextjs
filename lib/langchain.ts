@@ -18,15 +18,88 @@ import { auth } from "@clerk/nextjs/server";
 const model = new ChatOpenAI({
     apiKey: process.env.OPENAI_API_KEY,
     model: 'gpt-3.5-turbo',
-    temperature: 0.5,
-    maxTokens: 100,
-    topP: 1,
-    frequencyPenalty: 0,
-    presencePenalty: 0,
-    stop: ['\n', 'Human:', 'AI:']
+    //temperature: 0.5,
+    //maxTokens: 100,
+    //topP: 1,
+    //frequencyPenalty: 0,
+    //presencePenalty: 0,
+    //stop: ['\n', 'Human:', 'AI:']
 });
 
 export const indexName = "chatpdf-nextjs";
 
+export const generateDocs = async (documentId: string) => {
+    const { userId } = await auth();
+    if (!userId) {
+        throw new Error('User not found');
+    }
 
+    console.log('Fetchind download url from firebase:', documentId);
+    const docRef = await adminDB.collection('users').doc(userId).collection('files').doc(documentId).get();
+    const downloadURL = docRef.data()?.downloadURL;
 
+    if (!downloadURL) {
+        throw new Error('Download URL not found');
+    }
+
+    console.log('Download URL fetched successfully:', downloadURL);
+    const response = await fetch(downloadURL);
+    const data = await response.blob();
+
+    console.log('Loading PDF:', documentId);
+    const pdfLoader = new PDFLoader(data);
+    const docs = await pdfLoader.load();
+
+    console.log('Splitting document into smaller parts:', documentId);
+    const splitter = new RecursiveCharacterTextSplitter();
+    const splitDocs = await splitter.splitDocuments(docs);
+    return splitDocs;
+}
+
+export const namespaceExists = async (index: Index<RecordMetadata>, namespace: string) => {
+    if (!namespace) {
+        throw new Error('Namespace not provided');
+    }
+
+    const { namespaces } = await index.describeIndexStats();
+    return namespaces?.[namespace] !== undefined;
+}
+
+export const generateEmbeddingsInPineconeVectorStore = async (documentId: string) => {
+    const { userId } = await auth();
+
+    if (!userId) {
+        throw new Error('User not found');
+    }
+
+    let pineconeVectorStore;
+
+    console.log('Generating embeddings for documentId:', documentId);
+    const embeddings = new OpenAIEmbeddings();
+
+    const index = await pineconeClient.index(indexName);
+    const namespace = await namespaceExists(index, documentId);
+
+    if (namespace) {
+        console.log('Namespace already exists, reusing it:', documentId);
+
+        pineconeVectorStore = await PineconeStore.fromExistingIndex(embeddings, {
+            pineconeIndex: index,
+            namespace: documentId,
+        });
+
+        return pineconeVectorStore;
+    }
+
+    const splitDocs = await generateDocs(documentId);
+    console.log(`Storing the embeddings in namespace ${documentId} in the ${indexName} Pinecone vector store:`);
+
+    pineconeVectorStore = await PineconeStore.fromDocuments(splitDocs,
+        embeddings, {
+        pineconeIndex: index,
+        namespace: documentId,
+    }
+    );
+
+    return pineconeVectorStore;
+}

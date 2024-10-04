@@ -5,6 +5,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
 import { storage, db } from 'lib/firebase';
 import { v4 as uuid } from 'uuid';
+import { generateEmbeddings } from '@/actions/generateEmbeddings';
 
 export enum StatusText {
     UPLOADING = 'Uploading..',
@@ -58,6 +59,7 @@ export default function useFileUpload() {
 
             setStatus(StatusText.GENERATING);
             //Generating AI Embeding
+            await generateEmbeddings(fileIdToUploadTo);
 
             setFileId(fileIdToUploadTo);
         });
