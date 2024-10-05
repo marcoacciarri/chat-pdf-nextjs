@@ -12,7 +12,7 @@ const firebaseConfig = {
     projectId: "chat-pdf-nextjs",
     storageBucket: "chat-pdf-nextjs.appspot.com",
     messagingSenderId: "556235435282",
-    appId: "1:556235435282:web:08262bc2a83ad61a53d7cb"
+    appId: "1:556235435282:web:e529f7654ceb887b53d7cb"
 };
 
 // Initialize Firebase making sure there is only 1 instance of app 
