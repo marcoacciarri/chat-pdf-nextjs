@@ -57,6 +57,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 - Create new index by going to Dashboard > Database > Create index
 - Give it a name and choose 1,536 dimensions and "cosine" method (best for AI)
 - Go down to serverless section and choose "AWS", choose region and Create Index
+- Go to your project > API KEYS and save the api key in PINECONE_API_KEY
 
 ## Integrate Langchain
 - go js.langchain.com/docs/how_to/installation
