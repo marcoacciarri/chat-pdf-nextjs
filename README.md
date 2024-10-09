@@ -47,7 +47,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 - Go to Build > Firebase Database > Create DB in test mode
 - Go to Build > Storage > Create DB in test mode
 - Click on settings icons > Project Settings > Service Accounts > Generate new private key
-- Save downloaded key to repository renaming to serviceAcccount - make sure to gitignore it
+- Save downloaded key to repository rename it to serviceAcccountKey.json - make sure to gitignore it
 - run `npm install firebase-admin` to install the serve side sdk
 - Copy the node.js config snippet to firebaseAdmin.ts
 
