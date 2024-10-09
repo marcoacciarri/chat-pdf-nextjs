@@ -66,7 +66,11 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
     - `npm install @langchain/community @langchain/core`, 
     - `npm install @langchain/openai @langchain/core`, 
     - `npm install @langchain/pinecone @langchain/core`
-- 
+
+## Integrate with OpenAI
+- go to openai.com create an acccount
+- go to https://platform.openai.com/api-keys, create an api key and save it
+- save api key in OPENAI_API_KEY in .env.local
 
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

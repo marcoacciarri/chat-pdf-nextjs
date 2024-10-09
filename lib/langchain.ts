@@ -17,7 +17,7 @@ import { auth } from "@clerk/nextjs/server";
 // Initialiaze OpenAI model 
 const model = new ChatOpenAI({
     apiKey: process.env.OPENAI_API_KEY,
-    model: 'gpt-3.5-turbo',
+    model: 'gpt-4o-mini',
     //temperature: 0.5,
     //maxTokens: 100,
     //topP: 1,
